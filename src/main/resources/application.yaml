@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: api-gateway-service
+
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: payment-route
+            uri:
+              lb://payment-service
+            predicates:
+              - Path=/api/payments/**
+server:
+  port: 8081
