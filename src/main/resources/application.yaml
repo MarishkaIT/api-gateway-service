@@ -1,15 +1,29 @@
 spring:
   application:
     name: api-gateway-service
+  main:
+    web-application-type: reactive
 
   cloud:
     gateway:
-      mvc:
-        routes:
-          - id: payment-route
-            uri:
-              lb://payment-service
-            predicates:
-              - Path=/api/payments/**
+      routes:
+        - id: payment-route
+          uri:
+            lb://payment-service
+          predicates:
+            - Path=/api/payments/**
+      loadbalancer:
+        ribbon:
+          NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka.example.com:8761/eureka
+
 server:
   port: 8081
+
+payment:
+  gateway:
+    url: https://localhost:8081
