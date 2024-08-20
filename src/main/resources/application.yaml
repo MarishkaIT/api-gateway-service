@@ -15,14 +15,14 @@ spring:
       loadbalancer:
         ribbon:
           NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+          servers:
+            - payment-service:8081
 
 eureka:
   client:
     service-url:
       defaultZone: http://eureka.example.com:8761/eureka
 
-server:
-  port: 8081
 
 payment:
   gateway:
