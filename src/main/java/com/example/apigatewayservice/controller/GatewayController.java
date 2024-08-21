@@ -1,8 +1,6 @@
 package com.example.apigatewayservice.controller;
 
 import com.netflix.appinfo.InstanceInfo;
-import com.sun.jdi.InvalidStackFrameException;
-import jdk.dynalink.linker.LinkerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -22,6 +20,7 @@ public class GatewayController {
 
     @Autowired
     private DiscoveryClient discoveryClient;
+    @Autowired
     private RestTemplate restTemplate;
 
     @GetMapping("/payments")

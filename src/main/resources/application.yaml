@@ -4,7 +4,23 @@ server:
 spring:
   application:
     name: api-gateway-service
-
+  cloud:
+    gateway:
+      routes:
+        - id: payment-service
+          uri:
+            http://localhost:8081
+          predicates:
+            - Path=/payments/**
+  security:
+    oauth2:
+      client:
+        registration:
+          payment-service:
+            client-id: payment-service-client-id
+            client-secret: payment-service-client-secret
+            authorization-grant-type: authorization_code
+            redirect-uri: '{baseUrl}/login/oauth2/code/{registrationId}'
 eureka:
   client:
     service-url:
